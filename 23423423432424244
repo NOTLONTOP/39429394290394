@@ -32,7 +32,7 @@ local Services = {
     StarterPack = GetService(game, "StarterPack");
     StarterGui = GetService(game, "StarterGui");
     TeleportService = GetService(game, "TeleportService");
-    Workspace = GetService(game, "Workspace");
+    CoreGui = GetService(game, "Workspace");
     TweenService = GetService(game, "TweenService");
     HttpService = GetService(game, "HttpService");
     TextService = GetService(game, "TextService");
@@ -768,7 +768,7 @@ end
 
 local Settings = {
     Prefix = "!",
-    CommandBarPrefix = "",
+    CommandBarPrefix = "Semicolon",
     ChatPrediction = false,
     Macros = {}
 }
@@ -964,7 +964,7 @@ Guis = {}
 ParentGui = function(Gui, Parent)
     Gui.Name = sub(gsub(GenerateGUID(Services.HttpService, false), '-', ''), 1, random(25, 30))
     ProtectInstance(Gui);
-    Gui.Parent = Parent or Services.Workspace
+    Gui.Parent = Parent or Services.CoreGui
     Guis[#Guis + 1] = Gui
     return Gui
 end
@@ -3653,7 +3653,7 @@ AddCommand("age", {}, "ages a player", {"1"}, function(Caller, Args)
 end)
 
 AddCommand("nosales", {}, "no purchase prompt notifications will be shown", {}, function()
-    Workspace.PurchasePromptApp.PurchasePromptUI.Visible = false
+    CoreGui.PurchasePromptApp.PurchasePromptUI.Visible = false
     return "You'll no longer recive sale prompts"
 end)
 
@@ -6992,10 +6992,10 @@ getgenv().F_A = {
     GetConfig = GetConfig
 }
 
-Utils.Notify(LocalPlayer, "walkspeed/jumppower", format("script loaded in %.3f seconds", (tick()) - start));
+Utils.Notify(LocalPlayer, "Loaded", format("script loaded in %.3f seconds", (tick()) - start));
 Utils.Notify(LocalPlayer, "Welcome", "'cmds' to see all of the commands");
 if (debug.info(2, "f") == nil) then
-    Utils.Notify(LocalPlayer, "NOTLONTOP", "use the loadstring to get latest updates (https://fatesc/fates-admin)", 10);
+    Utils.Notify(LocalPlayer, "Outdated Script", "use the loadstring to get latest updates (https://fatesc/fates-admin)", 10);
 end
 local LatestCommit = JSONDecode(Services.HttpService, game.HttpGetAsync(game, "https://api.github.com/repos/fatesc/fates-admin/commits?per_page=1&path=main.lua"))[1]
 wait(1);
